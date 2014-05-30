@@ -21,10 +21,9 @@ open(url) do |rss|
   feed.items.each do |item|
     puts "Item: #{item.link}"
     response = HTTParty.get(item.link, :headers => @default_request_headers)
-    # puts response
     body = Nokogiri::HTML(response)
     
-    #Response body does not conatain the generic craigslist email... wtf its in the DOM if you look at the page
+    #Response body does not conatain the generic craigslist email... <div class="returnemail js-only"></div>
     some_email = body.xpath("//a[contains(text(), '@')]").text
     puts some_email
   end
