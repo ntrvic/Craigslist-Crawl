@@ -23,7 +23,7 @@ open(url) do |rss|
     response = HTTParty.get(item.link, :headers => @default_request_headers)
     body = Nokogiri::HTML(response)
     
-    #Response body does not conatain the generic craigslist email... <div class="returnemail js-only"></div>
+    #Response body does not contain the generic craigslist email... <div class="returnemail js-only"></div>
     some_email = body.xpath("//a[contains(text(), '@')]").text
     puts some_email
   end
